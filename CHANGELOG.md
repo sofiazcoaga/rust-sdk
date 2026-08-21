@@ -31,6 +31,7 @@
 
 ### Enhancements
 
+* [FEATURE][rust] Added `TransactionRequestBuilder::explicit_input_notes` so callers can pin each input note's authenticated or unauthenticated mode instead of deriving it from the executing client's store, enabling reproducible transaction summaries across clients with different locally tracked inclusion proofs.
 * [FEATURE][rust] Added `ChainAnchor` with `Client::execute_transaction_at` and `Client::chain_anchor_for_request` to capture and execute against a pinned reference block instead of the sync height, so a transaction summary signed at one block — which binds the reference block commitment since protocol 0.16 — can be reproduced and executed later on any client ([#2421](https://github.com/0xMiden/rust-sdk/pull/2421)).
 * [FEATURE][rust] A client that only watches a public account now recovers notes the account consumed authenticated, even when it never tracked them by tag. During sync it reads the note references the node attaches to the account's transactions, fetches each note body by id, and surfaces it through `InputNoteReader`. Requires node `0.15.1` ([#2300](https://github.com/0xMiden/rust-sdk/pull/2300)).
 * [FEATURE][cli] Added a `--payback-note-type` option to `swap` so the payback note can be created as public or private (defaults to private). Public payback works without any off-band advice now that SWAP derives the payback recipient deterministically ([#2190](https://github.com/0xMiden/rust-sdk/pull/2190)).
